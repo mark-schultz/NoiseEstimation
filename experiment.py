@@ -20,7 +20,7 @@ def param_gen():
     cc.Enable(PKESchemeFeature.LEVELEDSHE)
     return cc
 
-def key_gen():
+def key_gen(cc):
     keys = cc.KeyGen()
     cc.EvalMultKeyGen(keys.secretKey)
     return keys
