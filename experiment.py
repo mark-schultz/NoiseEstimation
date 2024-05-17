@@ -7,12 +7,13 @@
 from openfhe import *
 import time
 
+BATCH_SIZE = 8
+
 def param_gen():
-    batch_size = 8
     parameters = CCParamsCKKSRNS()
     parameters.SetMultiplicativeDepth(5)
     parameters.SetScalingModSize(50)
-    parameters.SetBatchSize(batch_size)
+    parameters.SetBatchSize(BATCH_SIZE)
 
     cc = GenCryptoContext(parameters)
     cc.Enable(PKESchemeFeature.PKE)
@@ -52,7 +53,7 @@ def trial(cc, keys):
     cRes_depth1 = cc.Rescale(cRes_depth2)
 
     result = cc.Decrypt(cRes_depth1,keys.secretKey)
-    result.SetLength(batch_size)
+    result.SetLength(BATCH_SIZE)
     return result
 
 if __name__ == "__main__":
